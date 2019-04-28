@@ -47,14 +47,14 @@ class UploadCommand(Command):
 
 setup(
     name='pytube',
-    version='9.4.0',
+    version='9.5.0',
     author='Nick Ficano',
-    author_email='nficano@gmail.com',
+    author_email='ntsinh90@gmail.com',
     packages=['pytube', 'pytube.contrib'],
     package_data={
         '': ['LICENSE'],
     },
-    url='https://github.com/nficano/pytube',
+    url='https://github.com/sinhtruong/pytube',
     license='MIT',
     entry_points={
         'console_scripts': [

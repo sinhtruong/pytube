@@ -113,13 +113,22 @@ def video_info_url(
         parameters.
     """
     if age_restricted:
-        sts = regex_search(r'"sts"\s*:\s*(\d+)', embed_html, group=1)
-        # Here we use ``OrderedDict`` so that the output is consistent between
-        # Python 2.7+.
+        # sts = regex_search(r'"sts"\s*:\s*(\d+)', embed_html, group=1)
+        # # Here we use ``OrderedDict`` so that the output is consistent between
+        # # Python 2.7+.
+        # params = OrderedDict([
+        #     ('video_id', video_id),
+        #     ('eurl', eurl(video_id)),
+        #     ('sts', sts),
+        # ])
+
         params = OrderedDict([
             ('video_id', video_id),
-            ('eurl', eurl(video_id)),
-            ('sts', sts),
+            ('el', '$el'),
+            ('ps', 'default'),
+            ('eurl', quote(watch_url)),
+            ('hl', 'en_US'),
+            #('t', quote(t)),
         ])
     else:
         # I'm not entirely sure what ``t`` represents. Looks to represent a
