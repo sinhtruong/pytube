@@ -113,15 +113,21 @@ def video_info_url(
         parameters.
     """
     if age_restricted:
-        # sts = regex_search(r'"sts"\s*:\s*(\d+)', embed_html, group=1)
-        # # Here we use ``OrderedDict`` so that the output is consistent between
-        # # Python 2.7+.
-        # params = OrderedDict([
-        #     ('video_id', video_id),
-        #     ('eurl', eurl(video_id)),
-        #     ('sts', sts),
-        # ])
-
+        sts = regex_search(r'"sts"\s*:\s*(\d+)', embed_html, group=1)
+        # Here we use ``OrderedDict`` so that the output is consistent between
+        # Python 2.7+.
+        params = OrderedDict([
+            ('video_id', video_id),
+            ('eurl', eurl(video_id)),
+            ('sts', sts),
+        ])
+    else:
+        # I'm not entirely sure what ``t`` represents. Looks to represent a
+        # boolean.
+        # t = regex_search(
+        #     r'\W[\'"]?t[\'"]?: ?[\'"](.+?)[\'"]', watch_html,
+        #     group=0,
+        # )
         params = OrderedDict([
             ('video_id', video_id),
             ('el', '$el'),
@@ -129,21 +135,6 @@ def video_info_url(
             ('eurl', quote(watch_url)),
             ('hl', 'en_US'),
             #('t', quote(t)),
-        ])
-    else:
-        # I'm not entirely sure what ``t`` represents. Looks to represent a
-        # boolean.
-        t = regex_search(
-            r'\W[\'"]?t[\'"]?: ?[\'"](.+?)[\'"]', watch_html,
-            group=0,
-        )
-        params = OrderedDict([
-            ('video_id', video_id),
-            ('el', '$el'),
-            ('ps', 'default'),
-            ('eurl', quote(watch_url)),
-            ('hl', 'en_US'),
-            ('t', quote(t)),
         ])
     return 'https://youtube.com/get_video_info?' + urlencode(params)
 
