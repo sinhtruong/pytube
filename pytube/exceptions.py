@@ -40,5 +40,5 @@ class LiveStreamError(ExtractError):
     """Video is a live stream."""
 
 
-class VideoUnavailable(PytubeError):
-    """Video is unavailable."""
+# class VideoUnavailable(PytubeError):
+# """Video is unavailable."""
